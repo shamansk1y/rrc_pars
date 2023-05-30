@@ -100,7 +100,7 @@ class Client:
 
     def run(self):
         logger.info('Загрузка страницы...')
-        page = 18
+        page = 1
         self.start_time = time.time()
 
         while True:

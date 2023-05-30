@@ -47,7 +47,7 @@ class Client:
 
     def parse_page(self, html):
         soup = bs4.BeautifulSoup(html, 'lxml')
-        products = soup.select('.prod')[:20]
+        products = soup.select('.prod')[:59]
         if not products:
             return False
 
@@ -80,7 +80,7 @@ class Client:
 
     def run(self):
         logger.info('Загрузка страницы...')
-        page = 50
+        page = 1
         self.start_time = time.time()
 
         while True:
@@ -95,7 +95,7 @@ class Client:
 
             self.save_results()
 
-            if not has_next_page or any(result.availability == 'Немає в наявності' for result in self.result):
+            if not has_next_page or any(result.availability == 'під замовлення' for result in self.result):
                 self.total_time = time.time() - self.start_time
                 logger.info(f'Общее время парсинга всех страниц: {self.total_time:.2f} секунд')
                 break
